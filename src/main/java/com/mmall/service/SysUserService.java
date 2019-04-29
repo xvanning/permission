@@ -21,7 +21,7 @@ public class SysUserService {
 
     @Resource
     private SysUserMapper sysUserMapper;
-    @Resource
+//    @Resource
 //    private SysLogService sysLogService;
 
     public void save(UserParam param) {
