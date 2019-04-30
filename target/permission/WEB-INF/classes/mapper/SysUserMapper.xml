@@ -36,7 +36,7 @@
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR},
       #{mail,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{deptId,jdbcType=INTEGER},
       #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR},
-      #{operateTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR})
+      #{operatorTime,jdbcType=TIMESTAMP}, #{operateIp,jdbcType=VARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.mmall.model.SysUser" keyProperty="id" useGeneratedKeys="true">
         insert into sys_user
@@ -68,7 +68,7 @@
             <if test="operator != null">
                 operator,
             </if>
-            <if test="operateTime != null">
+            <if test="operatorTime != null">
                 operator_time,
             </if>
             <if test="operateIp != null">
@@ -103,8 +103,8 @@
             <if test="operator != null">
                 #{operator,jdbcType=VARCHAR},
             </if>
-            <if test="operateTime != null">
-                #{operateTime,jdbcType=TIMESTAMP},
+            <if test="operatorTime != null">
+                #{operatorTime,jdbcType=TIMESTAMP},
             </if>
             <if test="operateIp != null">
                 #{operateIp,jdbcType=VARCHAR},
@@ -138,8 +138,8 @@
             <if test="operator != null">
                 operator = #{operator,jdbcType=VARCHAR},
             </if>
-            <if test="operateTime != null">
-                operator_time = #{operateTime,jdbcType=TIMESTAMP},
+            <if test="operatorTime != null">
+                operator_time = #{operatorTime,jdbcType=TIMESTAMP},
             </if>
             <if test="operateIp != null">
                 operate_ip = #{operateIp,jdbcType=VARCHAR},
@@ -157,7 +157,7 @@
       status = #{status,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR},
       operator = #{operator,jdbcType=VARCHAR},
-      operator_time = #{operateTime,jdbcType=TIMESTAMP},
+      operator_time = #{operatorTime,jdbcType=TIMESTAMP},
       operate_ip = #{operateIp,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
