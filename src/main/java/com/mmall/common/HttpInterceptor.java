@@ -19,6 +19,7 @@ import java.util.Map;
 @Slf4j
 public class HttpInterceptor extends HandlerInterceptorAdapter {
     private static final String START_TIME = "requestStartTime";
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String url = request.getRequestURI().toString();
@@ -40,6 +41,11 @@ public class HttpInterceptor extends HandlerInterceptorAdapter {
         long start = (Long) request.getAttribute(START_TIME);
         long end = System.currentTimeMillis();
         log.info("request completed. url:{}, cost:{} ms", url, end - start);
+        removeThreadLocalInfo();
+    }
 
+    public void removeThreadLocalInfo() {
+        RequestHolder.remove();
+        ;
     }
 }
