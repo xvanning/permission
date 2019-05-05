@@ -18,7 +18,7 @@ public class PageQuery {
     private int pageSize = 10;
 
     @Setter
-    private int offset;
+    private int offset = (pageNo - 1) * pageSize;
 
     public int getOffset() {
         return (pageNo - 1) * pageSize;
