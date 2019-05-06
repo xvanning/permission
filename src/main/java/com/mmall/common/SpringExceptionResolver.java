@@ -21,6 +21,9 @@ public class SpringExceptionResolver implements HandlerExceptionResolver {
 
     private static final String defaultMsg = "system error";
 
+    // 要验证请求是数据请求还是页面请求，有两种方案：
+    // 1. 通过request里面取出里面的Header，进行判断
+    // 2. 通过直接判断url的后缀来进行判断
     @Override
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
         ModelAndView mv;

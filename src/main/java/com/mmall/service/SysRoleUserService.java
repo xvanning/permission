@@ -28,8 +28,8 @@ public class SysRoleUserService {
     private SysRoleUserMapper sysRoleUserMapper;
     @Resource
     private SysUserMapper sysUserMapper;
-//    @Resource
-//    private SysLogMapper sysLogMapper;
+    @Resource
+    private SysLogMapper sysLogMapper;
 
     public List<SysUser> getListByRoleId(int roleId) {
         List<Integer> userIdList = sysRoleUserMapper.getUserIdListByRoleId(roleId);
@@ -50,7 +50,7 @@ public class SysRoleUserService {
             }
         }
         updateRoleUsers(roleId, userIdList);
-//        saveRoleUserLog(roleId, originUserIdList, userIdList);
+        saveRoleUserLog(roleId, originUserIdList, userIdList);
     }
 
     @Transactional
@@ -68,16 +68,16 @@ public class SysRoleUserService {
         }
         sysRoleUserMapper.batchInsert(roleUserList);
     }
-//    private void saveRoleUserLog(int roleId, List<Integer> before, List<Integer> after) {
-//        SysLogWithBLOBs sysLog = new SysLogWithBLOBs();
-//        sysLog.setType(LogType.TYPE_ROLE_USER);
-//        sysLog.setTargetId(roleId);
-//        sysLog.setOldValue(before == null ? "" : JsonMapper.object2String(before));
-//        sysLog.setNewValue(after == null ? "" : JsonMapper.object2String(after));
-//        sysLog.setOperator(RequestHolder.getCurrentUser().getUsername());
-//        sysLog.setOperatorIp(IpUtil.getRemoteIp(RequestHolder.getCurrentRequest()));
-//        sysLog.setOperatorTime(new Date());
-//        sysLog.setStatus(1);
-//        sysLogMapper.insertSelective(sysLog);
-//    }
+    private void saveRoleUserLog(int roleId, List<Integer> before, List<Integer> after) {
+        SysLogWithBLOBs sysLog = new SysLogWithBLOBs();
+        sysLog.setType(LogType.TYPE_ROLE_USER);
+        sysLog.setTargetId(roleId);
+        sysLog.setOldValue(before == null ? "" : JsonMapper.object2String(before));
+        sysLog.setNewValue(after == null ? "" : JsonMapper.object2String(after));
+        sysLog.setOperator(RequestHolder.getCurrentUser().getUsername());
+        sysLog.setOperatorIp(IpUtil.getRemoteIp(RequestHolder.getCurrentRequest()));
+        sysLog.setOperatorTime(new Date());
+        sysLog.setStatus(1);
+        sysLogMapper.insertSelective(sysLog);
+    }
 }

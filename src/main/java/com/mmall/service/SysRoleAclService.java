@@ -24,8 +24,8 @@ public class SysRoleAclService {
 
     @Resource
     private SysRoleAclMapper sysRoleAclMapper;
-//    @Resource
-//    private SysLogMapper sysLogMapper;
+    @Resource
+    private SysLogMapper sysLogMapper;
 
     public void changeRoleAcls(Integer roleId, List<Integer> aclIdList) {
         List<Integer> originAclIdList = sysRoleAclMapper.getAclIdListByRoleIdList(Lists.newArrayList(roleId));
@@ -38,7 +38,7 @@ public class SysRoleAclService {
             }
         }
         updateRoleAcls(roleId, aclIdList);
-//        saveRoleAclLog(roleId, originAclIdList, aclIdList);
+        saveRoleAclLog(roleId, originAclIdList, aclIdList);
     }
 
     @Transactional
@@ -57,16 +57,16 @@ public class SysRoleAclService {
         sysRoleAclMapper.batchInsert(roleAclList);
     }
 
-//    private void saveRoleAclLog(int roleId, List<Integer> before, List<Integer> after) {
-//        SysLogWithBLOBs sysLog = new SysLogWithBLOBs();
-//        sysLog.setType(LogType.TYPE_ROLE_ACL);
-//        sysLog.setTargetId(roleId);
-//        sysLog.setOldValue(before == null ? "" : JsonMapper.object2String(before));
-//        sysLog.setNewValue(after == null ? "" : JsonMapper.object2String(after));
-//        sysLog.setOperator(RequestHolder.getCurrentUser().getUsername());
-//        sysLog.setOperatorIp(IpUtil.getRemoteIp(RequestHolder.getCurrentRequest()));
-//        sysLog.setOperatorTime(new Date());
-//        sysLog.setStatus(1);
-//        sysLogMapper.insertSelective(sysLog);
-//    }
+    private void saveRoleAclLog(int roleId, List<Integer> before, List<Integer> after) {
+        SysLogWithBLOBs sysLog = new SysLogWithBLOBs();
+        sysLog.setType(LogType.TYPE_ROLE_ACL);
+        sysLog.setTargetId(roleId);
+        sysLog.setOldValue(before == null ? "" : JsonMapper.object2String(before));
+        sysLog.setNewValue(after == null ? "" : JsonMapper.object2String(after));
+        sysLog.setOperator(RequestHolder.getCurrentUser().getUsername());
+        sysLog.setOperatorIp(IpUtil.getRemoteIp(RequestHolder.getCurrentRequest()));
+        sysLog.setOperatorTime(new Date());
+        sysLog.setStatus(1);
+        sysLogMapper.insertSelective(sysLog);
+    }
 }

@@ -47,6 +47,7 @@ public class SysAclController {
         return JsonData.success(sysAclService.getPageByAclModuleId(aclModuleId, pageQuery));
     }
 
+    // 获取当前权限点的所有角色和用户，没有渲染页面，只有json数据返回
     @RequestMapping("acls.json")
     @ResponseBody
     public JsonData acls(@RequestParam("aclId") int aclId) {
